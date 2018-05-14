@@ -1,11 +1,29 @@
-<div class="task" *ngFor="let card of cards">
+<div class="task">
   <div class="header">
       <div>
-        {{card.title}}
+        <!-- Render title here... -->
+        {{task.title}}
       </div>
+
+      <!-- Markup for dropdown menu here... -->
+    <select
+      name="status"
+
+      ngModel="{{task.status}}"
+      #selectStatus="ngModel"
+
+      (change)="changeStatus(selectStatus.value)"
+    >
+      <option *ngFor="let statusType of this.utilService.getStatusTypes()" >
+        {{ statusType }}
+      </option>
+
+    </select>
+
   </div>
   <hr>
   <div class="body">
-     <div>{{card.description}}</div>
+      <!-- Render description here... -->
+    {{task.description}}
   </div>
 </div>

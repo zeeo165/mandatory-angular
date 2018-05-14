@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { TaskService } from '../task.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {UtilService} from "../util.service";
 
 @Component({
   selector: 'task',
@@ -7,9 +7,17 @@ import { TaskService } from '../task.service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
-  cards = this.taskService.cards;
-  constructor(private taskService:TaskService) {}
 
-  ngOnInit() {
+  @Input() task;
+  @Output() statusChanged = new EventEmitter();
+
+
+
+  constructor(private utilService: UtilService) {}
+
+  changeStatus(updatedStatus) {
+    this.task.status = updatedStatus;
+    this.statusChanged.emit(this.task);
+    //console.log(this.task)
   }
 }

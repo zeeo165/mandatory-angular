@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TaskService } from '../task.service';
+import {TaskService} from "../task.service";
 
 @Component({
   selector: 'task-form',
@@ -7,14 +7,12 @@ import { TaskService } from '../task.service';
   styleUrls: ['./taskform.component.css']
 })
 export class TaskformComponent {
-  constructor(private taskService:TaskService) {}
 
-  onClick(title, description) {
-    this.taskService.cards.push({
-      title,
-      description
-    }
-  );
-  console.log(this.taskService.cards);
+
+  constructor(private taskService: TaskService) {}
+
+  submit(form) {
+    this.taskService.addTask(form.value.title, form.value.description);
+    //console.log(form.value)
   }
 }
